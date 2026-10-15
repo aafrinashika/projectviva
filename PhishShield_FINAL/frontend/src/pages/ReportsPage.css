@@ -1,0 +1,139 @@
+.mini-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100px;
+}
+
+.mini-bar {
+  height: 6px;
+  border-radius: 3px;
+  flex: 1;
+  max-width: 60px;
+}
+
+.success-bar {
+  background: var(--success);
+}
+
+.mini-bar-wrap span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.reports-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.export-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.export-btn {
+  justify-content: flex-start;
+  width: 100%;
+  padding: 12px 16px;
+}
+
+.export-pdf {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+.export-pdf:hover { opacity: 0.85; }
+
+.export-csv {
+  background: var(--success-light);
+  color: var(--success);
+}
+.export-csv:hover { opacity: 0.85; }
+
+.export-print {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.export-print:hover { opacity: 0.85; }
+
+@media (max-width: 900px) {
+  .reports-bottom { grid-template-columns: 1fr; }
+}
+
+@keyframes highlightRow {
+  0% { background: var(--primary-light); }
+  100% { background: transparent; }
+}
+
+.row-highlight {
+  animation: highlightRow 1.5s ease;
+}
+/* --- Print view -------------------------------------------------------- */
+/* .print-only is hidden on screen; only it (and nothing else in the app -
+   sidebar, topbar, footer, page nav, export/report widgets) shows when
+   printing. Plain monospace layout, no colors/icons/badges. */
+.print-only { display: none; }
+
+@media print {
+  .sidebar,
+  .app-topbar,
+  .app-footer,
+  .screen-only {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+    font-family: 'Courier New', Courier, monospace;
+    color: #000;
+    padding: 0;
+  }
+
+  .print-only h1 {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin: 0 0 2px 0;
+  }
+
+  .print-only h2 {
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin: 0 0 10px 0;
+  }
+
+  .print-generated {
+    font-size: 0.85rem;
+    margin: 0 0 20px 0;
+  }
+
+  .print-only h3 {
+    font-size: 0.95rem;
+    margin: 18px 0 4px 0;
+  }
+
+  .print-only hr {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 0 0 8px 0;
+  }
+
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .print-table td, .print-table th {
+    padding: 2px 12px 2px 0;
+    text-align: left;
+  }
+
+  .print-monthly th {
+    border-bottom: 1px solid #000;
+    font-weight: 700;
+  }
+}

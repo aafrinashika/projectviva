@@ -1,0 +1,6 @@
+import React, { useEffect, useState } from 'react';
+import Sidebar from '../components/Sidebar';
+import { orgFetch } from '../api';
+import './AdminDashboardPage.css';
+
+export default function PhishingAlertsPage(){const [alerts,setAlerts]=useState(null);useEffect(()=>{orgFetch('/api/org/alerts').then(d=>setAlerts(d.alerts)).catch(()=>setAlerts([]));},[]);return <Sidebar role="organization_admin"><div className="page-header"><h1>Phishing Alerts</h1><p>Monitor suspicious emails detected across the organization.</p></div><div className="card animate-in"><div className="card-header"><h3><i className="fas fa-exclamation-triangle" style={{color:'var(--danger)',marginRight:8}}></i>Phishing Alerts</h3></div><div className="table-wrap"><table><thead><tr><th>Date</th><th>User</th><th>Email</th><th>Risk</th></tr></thead><tbody>{alerts?.length?alerts.map(a=><tr key={a.id}><td className="muted-cell">{new Date(a.timestamp).toLocaleString()}</td><td>{a.user_email}</td><td><span className="mono-sm">{a.sender}</span></td><td><span className={`badge ${a.risk_score>=90?'badge-danger':'badge-warning'}`}>{a.risk_score}%</span></td></tr>):<tr><td colSpan="4" style={{textAlign:'center'}}>No phishing alerts.</td></tr>}</tbody></table></div></div></Sidebar>}
